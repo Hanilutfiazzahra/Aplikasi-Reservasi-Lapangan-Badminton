@@ -18,14 +18,14 @@ public class Transfer implements Pembayaran {
 	
 	@Override 
 	public void prosesPembayaran() { 
-		System.out.println("=== Instruksi Transfer ==="); 		
-		System.out.println("Silakan transfer ke rekening berikut:"); 		
+		System.out.println("=== Detail Transfer ==="); 				
 		System.out.println("Bank Tujuan : " + BANK_TUJUAN); 		
 		System.out.println("No. Rekening Tujuan: " + NO_REKENING_TUJUAN); 		
-		System.out.println("Jumlah Transfer : Rp" + jumlah); 		
+		System.out.println();
 		System.out.println("Dari:"); 		
 		System.out.println("- Bank Anda : " + bankPengirim); 		
-		System.out.println("- No. Rekening : " + rekeningPengirim); 		
+		System.out.println("- No. Rekening : " + rekeningPengirim); 
+		System.out.println("Jumlah Transfer : Rp" + jumlah);
 		System.out.println("Transfer berhasil."); 
 		
 		this.status = "Sukses"; 
