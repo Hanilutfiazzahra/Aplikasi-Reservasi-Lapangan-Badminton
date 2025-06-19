@@ -3,6 +3,7 @@ package main;
 import mission.utils.MissionUtils;
 import user.Admin;
 import user.Pelanggan;
+import user.User;
 import peralatan.*;
 import lapangan.*;
 import pembayaran.*;
@@ -15,7 +16,7 @@ public class App {
 	
     public static void main(String[] args) {
         boolean aktif = true;
-        Pelanggan pelanggan = null;
+        User pelanggan = null;
         
         ArrayList<Lapangan> daftarLapangan = new ArrayList<>();
         daftarLapangan.add(new LapanganIndoor("L001", "Lapangan Indoor A", "Gedung A", 50000, new String[]{"AC", "Lampu"}));
@@ -33,7 +34,7 @@ public class App {
                 role = Integer.parseInt(MissionUtils.getUserInput());
             } catch (NumberFormatException e) {
                 System.out.println("Input harus berupa angka 1, 2, atau 3.");
-                continue; // balik ke awal loop
+                continue; 
             }
             boolean regis = false;
 
@@ -44,7 +45,7 @@ public class App {
                 String pass = MissionUtils.getUserInput();
 
                 if (email.equals("admin@email.com") && pass.equals("admin123")) {
-                    Admin admin = new Admin("admin1", "Admin", email, pass);
+                    User admin = new Admin("admin1", "Admin", email, pass);
                     boolean jalan = true;
                     while (jalan) {
                         System.out.println("\n=== MENU ADMIN ===");
@@ -55,7 +56,7 @@ public class App {
                         int pilih = Integer.parseInt(MissionUtils.getUserInput());
                         switch (pilih) {
                             case 1:
-                                admin.lihatHistori();
+                            	 ((Admin) admin).lihatHistori();
                                 RekapPemesanan.tampilRekap();
                                 break;
                             case 2:
@@ -174,7 +175,7 @@ public class App {
                                 }
 
                                 lapangan.pesanJam(jamList);
-                                Price pemesanan = new Price(pelanggan, lapangan, jamList);
+                                Price pemesanan = new Price((Pelanggan) pelanggan, lapangan, jamList);
                                 double total = pemesanan.hitungTotalHarga(durasi);
                                 System.out.println("Total harga: Rp" + total);
 
@@ -186,7 +187,7 @@ public class App {
                                     String kodeDiskon = MissionUtils.getUserInput();
 
                                     
-                                    Diskon diskon = new Diskon(pelanggan, lapangan, jamList, kodeDiskon); 
+                                    Diskon diskon = new Diskon((Pelanggan) pelanggan, lapangan, jamList, kodeDiskon); 
                                     double diskonHarga = diskon.validasiKodeVoucher(); 
 
                                     if (diskonHarga > 0) {
